@@ -1,0 +1,3 @@
+#!/bin/bash
+free_mm=`free -m | grep Mem: | awk '{print $4}'`
+[ $free_mm -lt 512 ] && echo "Insufficient Memmory" || echo "Sufficient"

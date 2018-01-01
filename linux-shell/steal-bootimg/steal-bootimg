@@ -1,0 +1,5 @@
+#!/bin/bash
+cp ~/Pictures/kali-grub-opiece.png /usr/share/images/desktop-base/
+cat /boot/grub/grub.cfg | sed 's/kali-grub/kali-grub-opiece/g' > /boot/grub/grub-buff.cfg
+mv /boot/grub/grub-buff.cfg /boot/grub/grub.cfg
+

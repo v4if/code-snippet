@@ -1,0 +1,6 @@
+#!/bin/bash
+time=$(date "+%Y-%m-%d-%H%M%S")
+path="/root/Pictures/PictureShots/"
+suffix=".png"
+picture=$path$time$suffix
+scrot -s $picture

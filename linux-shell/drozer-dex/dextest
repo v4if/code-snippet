@@ -1,0 +1,56 @@
+#!/bin/bash
+dex_name=dextest
+dex_home=/root/Advance/drozer-modules
+drozer_home=/usr/local/lib/python2.7/dist-packages/drozer
+
+COPYRIGHT() {
+	echo [@] All By v4if [@]
+}
+
+doBuild() {
+	# 判断当前目录
+	path=`pwd`
+	if [ "${path}" != "${dex_home}" ]; then
+		cd ${dex_home}
+	fi
+	javac -cp ${drozer_home}/lib/android.jar ${dex_home}/${dex_name}.java
+	${drozer_home}/lib/dx --dex --output=dextest.apk ${dex_name}*.class
+	if [ -f /usr/local/lib/python2.7/dist-packages/drozer/modules/common/${dex_name}.apk ]; then
+		rm -rf /usr/local/lib/python2.7/dist-packages/drozer/modules/common/${dex_name}.apk
+	fi
+	cp ${dex_home}/${dex_name}.apk ${drozer_home}/modules/common/
+	COPYRIGHT
+}
+
+doClean() {
+	rm -rf ${dex_home}/${dex_name}.class ${dex_home}/${dex_name}.apk
+	rm -rf ${drozer_home}/modules/common/${dex_name}.apk
+	COPYRIGHT
+}
+
+doHelp() {
+	echo "Usage: `basename $0` [options]"
+	echo "Options:"$'\n' \
+	"-b build from java to apk & load apk to drozer module common"$'\n' \
+	"-c clean object & remove apk file from drozer module common"$'\n' \
+	"-h help doc"
+}
+
+while getopts 'bch' OPT; do
+    case $OPT in
+    	b)
+			doBuild
+			;;
+        c)
+			doClean
+			;;
+        h)
+			doHelp
+			;;
+        ?)
+            echo "Usage: `basename $0` [options]"
+    esac
+done
+
+# 移除已经处理的参数
+shift $(($OPTIND - 1))

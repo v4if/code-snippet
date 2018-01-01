@@ -1,0 +1,2 @@
+#!/bin/bash
+cat AndroidManifest.xml| tr '\n' '@' | sed 's/@/\r\n/g' > out.txt

@@ -1,0 +1,4 @@
+#!/bin/bash
+find -name "*[.h|.cc]" -type f | xargs cat | wc -l
+#OR
+find . -name "*[.h|.cc]" -type f|xargs wc -l|grep "total"|awk '{print $1}'
