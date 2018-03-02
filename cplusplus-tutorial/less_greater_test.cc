@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void printArr(vector<int> arr){
+void printArr(vector<int>& arr){
     for (int a : arr) cout << a << " ";
     cout << "\n";
 }
